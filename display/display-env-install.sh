@@ -5,6 +5,9 @@ set -e
 INSTALL_DIR="/home/$USER/OpenNept4une"
 VENV_PATH="$INSTALL_DIR/display/venv"
 
+sudo apt update
+sudp apt install python3-venv
+
 # Navigate to the display script directory
 cd "$INSTALL_DIR/display" || exit
 
