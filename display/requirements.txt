@@ -1,8 +1,6 @@
 certifi==2023.11.17
 charset-normalizer==3.3.2
 idna==3.6
-MoonrakerPy==0.2.2
-nextion==1.8.1
 pyserial==3.5
 pyserial-asyncio==0.6
 requests==2.31.0

@@ -8,8 +8,6 @@ import serial_asyncio
 import serial
 import time
 import re
-import threading
-import socket
 import os, os.path
 import asyncio
 import traceback
