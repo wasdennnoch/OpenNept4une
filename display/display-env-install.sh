@@ -5,9 +5,6 @@ set -e
 INSTALL_DIR="/home/$USER/OpenNept4une"
 VENV_PATH="$INSTALL_DIR/display/venv"
 
-sudo apt update
-sudo apt install python3.11-venv -y
-
 # Navigate to the script directory
 cd "$INSTALL_DIR/display" || exit
 
