@@ -17,7 +17,7 @@ from response_actions import response_actions, response_errors
 logger = logging.getLogger(__name__)
 
 printer_data_dir = Path.home() / "printer_data"
-log_file = Path(printer_data_dir / "logs " / "display_connector.log")
+log_file = Path(printer_data_dir / "logs" / "display_connector.log")
 moonraker_socket_file = Path(printer_data_dir / "comms" / "moonraker.sock")
 
 def format_temp(value):
