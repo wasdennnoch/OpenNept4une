@@ -20,6 +20,9 @@ printer_data_dir = Path.home() / "printer_data"
 log_file = Path(printer_data_dir / "logs" / "display_connector.log")
 moonraker_socket_file = Path(printer_data_dir / "comms" / "moonraker.sock")
 
+display_serial_port="/dev/ttyUSB1"
+display_baud_rate=115200
+
 def format_temp(value):
     if value is None:
         return "N/A"
@@ -411,7 +414,7 @@ class DisplayController:
         loop.create_task(self.listen())
 
     async def listen(self):
-        self.serial_reader, self.serial_writer = await serial_asyncio.open_serial_connection(url='/dev/ttyS1', baudrate=115200)
+        self.serial_reader, self.serial_writer = await serial_asyncio.open_serial_connection(url=display_serial_port, baudrate=display_baud_rate)
         self._loop.create_task(self._process_serial(self.serial_reader))
         await self._connect()
         ret = await self._send_moonraker_request("printer.objects.subscribe", {"objects": {
