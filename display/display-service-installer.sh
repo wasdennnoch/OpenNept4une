@@ -5,7 +5,8 @@ set -e
 INSTALL_DIR="/home/$USER/OpenNept4une"
 
 # Run the first script
-chmod +x "$INSTALL_DIR/display/display-env-install.sh" && sudo "$INSTALL_DIR/display/display-env-install.sh"
+chmod +x "$INSTALL_DIR/display/display-env-install.sh"
+source "$INSTALL_DIR/display/display-env-install.sh"
 
 # Define the service file path, script path, and log file path
 SERVICE_FILE="/etc/systemd/system/display.service"

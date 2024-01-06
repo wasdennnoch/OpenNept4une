@@ -5,7 +5,7 @@ set -e
 INSTALL_DIR="/home/$USER/OpenNept4une"
 VENV_PATH="$INSTALL_DIR/display/venv"
 
-# Navigate to the script directory
+# Navigate to the display script directory
 cd "$INSTALL_DIR/display" || exit
 
 # Create a Python virtual environment in the current directory
