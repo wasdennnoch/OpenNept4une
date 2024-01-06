@@ -1,5 +1,5 @@
 import json
-import pathlib
+from pathlib import Path
 import sys
 import logging
 
@@ -18,7 +18,9 @@ from response_actions import response_actions, response_errors
 
 logger = logging.getLogger(__name__)
 
-log_file = "/home/mks/printer_data/logs/display_connector.log"
+printer_data_dir = Path.home() / "printer_data"
+log_file = Path(printer_data_dir / "logs " / "display_connector.log")
+moonraker_socket_file = Path(printer_data_dir / "comms" / "moonraker.sock")
 
 def format_temp(value):
     if value is None:
@@ -460,13 +462,11 @@ class DisplayController:
         return ips
 
     async def _connect(self) -> None:
-        sockfile = "/home/mks/printer_data/comms/moonraker.sock"
-        sockpath = pathlib.Path(sockfile).expanduser().resolve()
-        logger.info(f"Connecting to Moonraker at {sockpath}")
+        logger.info(f"Connecting to Moonraker at {moonraker_socket_file}")
         while True:
             try:
                 reader, writer = await asyncio.open_unix_connection(
-                    sockpath, limit=SOCKET_LIMIT
+                    moonraker_socket_file, limit=SOCKET_LIMIT
                 )
             except asyncio.CancelledError:
                 raise

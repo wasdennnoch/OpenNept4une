@@ -1,19 +1,24 @@
 #!/bin/bash
 
+set -e
+
+INSTALL_DIR="/home/$USER/OpenNept4une"
+VENV_PATH="$INSTALL_DIR/display/venv"
+
 sudo apt update
 sudo apt install python3.11-venv -y
 
 # Navigate to the script directory
-cd /home/mks/OpenNept4une/display
+cd "$INSTALL_DIR/display" || exit
 
 # Create a Python virtual environment in the current directory
-python3 -m venv venv
+python3 -m venv $VENV_PATH
 
 # Activate the virtual environment
-source venv/bin/activate
+source "$VENV_PATH/bin/activate"
 
 # Install required Python packages
-pip install pyserial moonrakerpy nextion pyserial_asyncio
+pip install -r requirements.txt
 
 # Deactivate the virtual environment
 deactivate

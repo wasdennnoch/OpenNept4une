@@ -1,12 +1,16 @@
 #!/bin/bash
 
+set -e
+
+INSTALL_DIR="/home/$USER/OpenNept4une"
+
 # Run the first script
-chmod +x /home/mks/OpenNept4une/display/display-env-install.sh && sudo /home/mks/OpenNept4une/display/display-env-install.sh
+chmod +x "$INSTALL_DIR/display/display-env-install.sh" && sudo "$INSTALL_DIR/display/display-env-install.sh"
 
 # Define the service file path, script path, and log file path
 SERVICE_FILE="/etc/systemd/system/display.service"
-SCRIPT_PATH="/home/mks/OpenNept4une/display/display.py"
-VENV_PATH="/home/mks/OpenNept4une/display/venv"
+SCRIPT_PATH="$INSTALL_DIR/display/display.py"
+VENV_PATH="$INSTALL_DIR/display/venv"
 LOG_FILE="/var/log/display.log"
 
 # Check if the script exists
@@ -19,15 +23,15 @@ fi
 echo "Creating systemd service file at $SERVICE_FILE..."
 cat <<EOF | sudo tee $SERVICE_FILE > /dev/null
 [Unit]
-Description=My Python Script Service
+Description=Elegoo Neptune Display Driver
 After=network.target
 
 [Service]
 ExecStartPre=/bin/sleep 30
-ExecStart=/home/mks/OpenNept4une/display/venv/bin/python /home/mks/OpenNept4une/display/display.py >> /var/log/display.log 2>&1
-WorkingDirectory=$(dirname $SCRIPT_PATH)
+ExecStart=$VENV_PATH/bin/python $SCRIPT_PATH >> $LOG_FILE 2>&1
+WorkingDirectory=$(dirname "$SCRIPT_PATH")
 Restart=always
-User=$(whoami)
+User=$USER
 
 [Install]
 WantedBy=multi-user.target
